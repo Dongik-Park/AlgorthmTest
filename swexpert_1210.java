@@ -1,29 +1,32 @@
 package com.ssafy.algo;
 
 import java.util.Scanner;
-
+/**
+* í˜„ìž¬ : ê°€ìž¥ ìƒë‹¨ì—ì„œ 1ì¸ ê²½ìš° ì•„ëž˜ë¡œ íƒìƒ‰í•œë‹¤.
+* ê°œì„  : ê°€ìž¥ í•˜ë‹¨ì—ì„œ 2ì¸ ê²½ìš°ë¶€í„° ìœ„ë¡œ íƒìƒ‰í•œë‹¤.
+*/
 public class Solution1210 {
 	
 	private static final int size = 100;
 	private static int[][] ladder = new int[size][size];
 	
 	/**
-	 * Á¾·á ¿©ºÎ¸¦ È®ÀÎÇÏ´Â DFS ¸Þ¼Òµå
-	 * @param row °Ë»ç¸¦ ½ÃÀÛÇÒ ¿­
-	 * @param col °Ë»ç¸¦ ½ÃÀÛÇÒ Çà
-	 * @return Á¤»ó Á¾·á ¿©ºÎ
+	 * ì¢…ë£Œ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ëŠ” DFS ë©”ì†Œë“œ
+	 * @param row ê²€ì‚¬ë¥¼ ì‹œìž‘í•  ì—´
+	 * @param col ê²€ì‚¬ë¥¼ ì‹œìž‘í•  í–‰
+	 * @return ì •ìƒ ì¢…ë£Œ ì—¬ë¶€
 	 */
 	private static boolean isFinished(int row, int col) {
-		if(col > 0 && col < size - 1) { // »çÀÌ ¿­
+		if(col > 0 && col < size - 1) { // ì‚¬ì´ ì—´
 			for(int i = row; i < size; ++i) {
 				if(ladder[i][col] == 2) return true;
-				else if(ladder[i][col - 1] == 1) { // ÁÂÃø
+				else if(ladder[i][col - 1] == 1) { // ì¢Œì¸¡
 					for(int j = col - 1; j >= 0 ; --j) {
 						if(i + 1 < size && ladder[i + 1][j] == 1)
 							return isFinished(i + 1, j);
 					}
 				}
-				else if(ladder[i][col + 1] == 1) { // ¿ìÃø 
+				else if(ladder[i][col + 1] == 1) { // ìš°ì¸¡ 
 					for(int j = col + 1; j < size; ++j){
 						if(i + 1 < size && ladder[i + 1][j] == 1)
 							return isFinished(i + 1, j);
@@ -31,10 +34,10 @@ public class Solution1210 {
 				}
 			}
 		}
-		else if(col == 0) { // °¡Àå ÁÂÃø ¿­
+		else if(col == 0) { // ê°€ìž¥ ì¢Œì¸¡ ì—´
 			for(int i = row; i < size; ++i) {
 				if(ladder[i][col] == 2) return true;
-				else if(ladder[i][col + 1] == 1) { // ¿ìÃø¸¸
+				else if(ladder[i][col + 1] == 1) { // ìš°ì¸¡ë§Œ
 					for(int j = col + 1; j < size; ++j){
 						if(i + 1 < size && ladder[i + 1][j] == 1)
 							return isFinished(i + 1, j);
@@ -42,10 +45,10 @@ public class Solution1210 {
 				}
 			}
 		}
-		else if(col == size - 1) { // °¡Àå ¿ìÃø ¿­
+		else if(col == size - 1) { // ê°€ìž¥ ìš°ì¸¡ ì—´
 			for(int i = row; i < size; ++i) {
 				if(ladder[i][col] == 2) return true;
-				else if(ladder[i][col - 1] == 1) { // ÁÂÃø¸¸
+				else if(ladder[i][col - 1] == 1) { // ì¢Œì¸¡ë§Œ
 					for(int j = col - 1; j >= 0 ; --j) {
 						if(i + 1 < size && ladder[i + 1][j] == 1)
 							return isFinished(i + 1, j);
