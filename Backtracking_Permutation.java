@@ -1,68 +1,67 @@
-package com.ssafy.exercise;
 
 public class Backtracking_Permutation {
-	public static int arr[] = { 3, 5, 8, 10 }; // power setÀ» ÀúÀåÇÒ ¹è¿­
+	public static int arr[] = { 3, 5, 8, 10 }; 
 	/**
 	 * 
-	 * @param a     ¿ø¼Ò »ç¿ë ¿©ºÎ¸¦ Ã¼Å©ÇÒ ¹è¿­
-	 * @param k     ÇöÀç ´Ü°è
-	 * @param input ´Ü°èÀÇ ³¡¹üÀ§(º¯°æµÇÁö ¾ÊÀ½)
-	 * @param c     ÈÄº¸±ºÀ» ÀúÀåÇÒ ¹è¿­
-	 * @return ncands ÈÄº¸±º °³¼ö
+	 * @param a     ìˆœì—´ì˜ indexë¥¼ ì €ì¥í•  ë°°ì—´
+	 * @param k     í˜„ì¬ ë‹¨ê³„
+	 * @param input ë‹¨ê³„ì˜ ëë²”ìœ„(ë³€ê²½ë˜ì§€ ì•ŠìŒ)
+	 * @param c     í›„ë³´êµ°ì„ ì €ì¥í•  ë°°ì—´
+	 * @return ncands í›„ë³´êµ° ê°œìˆ˜
 	 */
 	private static int makeCandidate(int[] a, int k, int input, int[] c) {
-		boolean inPerm[] = new boolean[a.length];
-		
-		for(int i = 0; i < k; ++i)
+		boolean inPerm[] = new boolean[input]; // ì´ë¯¸ ì „ ë‹¨ê³„ì—ì„œ ì‚¬ìš©ëœ ìˆ«ìë¥¼ ì²´í¬í•  flag ë°°ì—´
+
+		for (int i = 0; i < k; ++i) // í˜„ì¬ ë‹¨ê³„ ì´ì „ê¹Œì§€ ì‚¬ìš©í•œ ìˆ«ìë§Œ ì²´í¬
 			inPerm[a[i]] = true;
-		
+
 		int ncands = 0;
-		for(int i = 0; i < input; ++i)
-			if(inPerm[i] == false) {
+		for (int i = 0; i < input; ++i)
+			if (inPerm[i] == false) {
 				c[ncands] = i;
 				ncands++;
 			}
-		
+
 		return ncands;
 	} // end of makeCandidate
 
 	/**
-	 * ¿Ï¼ºµÈ a ¹è¿­À» Àü´Ş ¹Ş¾Æ, ¿ø¼Ò¸¦ Ãâ·ÂÇÒÁö È®ÀÎÇØ¼­ power setÀ» Ãâ·Â
+	 * ì¡°í•©ì´ ì™„ì„±ëœ a ë°°ì—´ì„ ì „ë‹¬ ë°›ì•„, ì›ì†Œë¥¼ ì¶œë ¥í• ì§€ í™•ì¸í•´ì„œ permutationì„ ì¶œë ¥
 	 * 
-	 * @param a ¿ø¼Ò »ç¿ë ¿©ºÎ¸¦ Ã¼Å©ÇÒ ¹è¿­
-	 * @param k ÇöÀç ´Ü°è
+	 * @param a ì¡°í•©ì´ ì™„ì„±ëœ a ë°°ì—´
+	 * @param k í˜„ì¬ ë‹¨ê³„
 	 */
 	private static void processSolution(int[] a, int k) {
 		for (int i = 0; i < k; ++i) {
-			System.out.print(arr[a[i]] + " "); // power set Ãâ·Â
+			System.out.print(arr[a[i]] + " "); // permutation ì¶œë ¥
 		}
 		System.out.println();
 	} // end of processSolution
 
 	/**
 	 * 
-	 * @param a     ¿ø¼Ò »ç¿ë ¿©ºÎ¸¦ Ã¼Å©ÇÒ ¹è¿­
-	 * @param k     ÇöÀç ´Ü°è
-	 * @param input ´Ü°èÀÇ ³¡¹üÀ§(º¯°æµÇÁö ¾ÊÀ½)
+	 * @param a     ìˆœì—´ì˜ indexë¥¼ ì €ì¥í•  ë°°ì—´
+	 * @param k     í˜„ì¬ ë‹¨ê³„
+	 * @param input ë‹¨ê³„ì˜ ëë²”ìœ„(ë³€ê²½ë˜ì§€ ì•ŠìŒ)
 	 */
 	public static void backtracking(int a[], int k, final int input) {
 		// end part
 		if (k == input) {
-			processSolution(a, k);// power setÀ» Ãâ·ÂÇÏ±â
+			processSolution(a, k);// power setì„ ì¶œë ¥í•˜ê¸°
 			return;
 		}
 
 		// recursive part
-		int[] c = new int[a.length];
-		int ncands = makeCandidate(a, k, input, c); // ÈÄº¸±º ¸¸µé±â
+		int[] c = new int[a.length]; // í›„ë³´êµ°ì„ ì €ì¥í•  ë°°ì—´
+		int ncands = makeCandidate(a, k, input, c); // í›„ë³´êµ° ë§Œë“¤ê¸°
 		for (int i = 0; i < ncands; ++i) {
-			a[k] = c[i]; // ÇöÀç ´Ü°èÀÇ ÈÄº¸±º ÇÏ³ª¸¦ ³Ö´Â´Ù.
-			backtracking(a, k + 1, input); // ´ÙÀ½ ´Ü°è¸¦ ÁøÇàÇÏµµ·Ï k + 1 ´Ü°è¸¦ Àç±Í È£Ãâ
+			a[k] = c[i]; // í˜„ì¬ ë‹¨ê³„ì˜ í›„ë³´êµ° í•˜ë‚˜ë¥¼ ë„£ëŠ”ë‹¤.
+			backtracking(a, k + 1, input); // ë‹¤ìŒ ë‹¨ê³„ë¥¼ ì§„í–‰í•˜ë„ë¡ k + 1 ë‹¨ê³„ë¥¼ ì¬ê·€ í˜¸ì¶œ
 		}
 	} // end of backtracking
 
 	public static void main(String[] args) {
-		int[] a = new int[arr.length]; // ¼ø¿­À» ÀúÀåÇÒ ¹è¿­
+		int[] a = new int[arr.length]; // ìˆœì—´ì˜ indexë¥¼ ì €ì¥í•  ë°°ì—´
 
 		backtracking(a, 0, a.length);
 	} // end of main
