@@ -1,10 +1,10 @@
 package com.ssafy.exercise;
 
-public class RunLength_¹Úµ¿ÀÍ {
+public class RunLength_ë°•ë™ìµ {
 	static char compacted[] = new char[10000];
 	static int idx;
 	/**
-	 * compactedµÈ ¹®ÀÚ¿­À» µğÄÚµùÇÏ¿© Ãâ·ÂÇÏ´Â ÇÔ¼ö
+	 * compactedëœ ë¬¸ìì—´ì„ ë””ì½”ë”©í•˜ì—¬ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 	 */
 	public static void RLDecoding() {
 		for (int i = 0; i < idx; i += 2) {
@@ -15,8 +15,8 @@ public class RunLength_¹Úµ¿ÀÍ {
 		}
 	}
 	/**
-	 * Run length endcoding ÇÔ¼ö [ ¹®ÀÚ , ¹®ÀÚ °³¼ö, ¹®ÀÚ, ¹®ÀÚ °³¼ö ..]
-	 * @param input ÀÎÄÚµùÇÒ ¹®ÀÚ¿­
+	 * Run length endcoding í•¨ìˆ˜ [ ë¬¸ì , ë¬¸ì ê°œìˆ˜, ë¬¸ì, ë¬¸ì ê°œìˆ˜ ..]
+	 * @param input ì¸ì½”ë”©í•  ë¬¸ìì—´
 	 */
 	public static void RLEncoding(String input) {
 		int count = 0;
@@ -40,9 +40,9 @@ public class RunLength_¹Úµ¿ÀÍ {
 	}
 
 	/**
-	 * 70% È®·ü·Î ¾ËÆÄºª 5~9°³°¡ ¹İº¹µÇ´Â ±æÀÌ 20~59ÀÇ ¹®ÀÚ¿­ »ı¼º ÇÔ¼ö
+	 * 70% í™•ë¥ ë¡œ ì•ŒíŒŒë²³ 5~9ê°œê°€ ë°˜ë³µë˜ëŠ” ê¸¸ì´ 20~59ì˜ ë¬¸ìì—´ ìƒì„± í•¨ìˆ˜
 	 * 
-	 * @return ¿Ï¼ºµÈ ·£´ı ¹®ÀÚ¿­
+	 * @return ì™„ì„±ëœ ëœë¤ ë¬¸ìì—´
 	 */
 	private static String getRandomRedundantString() {
 		int len = (int) (Math.random() * 40 + 20);
@@ -62,9 +62,9 @@ public class RunLength_¹Úµ¿ÀÍ {
 
 	public static void main(String[] args) {
 		String str = getRandomRedundantString();
-		System.out.println(str + " ¹®ÀÚ¿­ ÀÎÄÚµù ½ÃÀÛ");
+		System.out.println(str + " ë¬¸ìì—´ ì¸ì½”ë”© ì‹œì‘");
 		RLEncoding(str);
-		System.out.println(str + " ¹®ÀÚ¿­ µğÄÚµù ½ÃÀÛ");
+		System.out.println(str + " ë¬¸ìì—´ ë””ì½”ë”© ì‹œì‘");
 		RLDecoding();
 	}
 }
