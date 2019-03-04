@@ -24,12 +24,12 @@ int dy[4] = { 0,-1,0,1 };
 queue<pair<int, int> > que;
 bool isMoved = false;
 /*
-	1½Ã°£ 45ºÐÁ¤µµ ÁøÇàÇÔ
-	bfs¿¡¼­ ½ÃÀÛÇÑ´Ù.
-	1. ¾ÖÃÊ¿¡ »óÇÏÁÂ¿ì·Î ÀÌµ¿ÇØ ³ª°¡°í - moveÇÔ¼ö ÀÌ¿ëÇØ¼­
-	2. 0ÀÌ ¾Æ´Ò °æ¿ì¿¡ ´ëÇÏ¿© fishes¿¡¼­ fish¸¦ Ã£°í ÇöÀç Å©±âº¸´Ù ÀÛÀºÁö ¿©ºÎ¸¦ ÆÇº°ÇÑ´Ù. - ÀÌ·¯¸é °¡Àå °¡±î¿î ¹°°í±â¸¦ ¾Ë¾Æ¼­ Ã£¾Æ°£´Ù.
-		2-1. ¸ÂÀ» °æ¿ì¿¡ ´ëÇØ queue¸¦ clearÇÏ°í ÁÂÇ¥¸¦ °»½ÅÇÑ´Ù.
-		2-2. ¾Æ´Ò °æ¿ì¿¡ ´ëÇØ move¸¦ Àç±Í È£ÃâÇÑ´Ù.
+	1ì‹œê°„ 45ë¶„ì •ë„ ì§„í–‰í•¨
+	bfsì—ì„œ ì‹œìž‘í•œë‹¤.
+	1. ì• ì´ˆì— ìƒí•˜ì¢Œìš°ë¡œ ì´ë™í•´ ë‚˜ê°€ê³  - moveí•¨ìˆ˜ ì´ìš©í•´ì„œ
+	2. 0ì´ ì•„ë‹ ê²½ìš°ì— ëŒ€í•˜ì—¬ fishesì—ì„œ fishë¥¼ ì°¾ê³  í˜„ìž¬ í¬ê¸°ë³´ë‹¤ ìž‘ì€ì§€ ì—¬ë¶€ë¥¼ íŒë³„í•œë‹¤. - ì´ëŸ¬ë©´ ê°€ìž¥ ê°€ê¹Œìš´ ë¬¼ê³ ê¸°ë¥¼ ì•Œì•„ì„œ ì°¾ì•„ê°„ë‹¤.
+		2-1. ë§žì„ ê²½ìš°ì— ëŒ€í•´ queueë¥¼ clearí•˜ê³  ì¢Œí‘œë¥¼ ê°±ì‹ í•œë‹¤.
+		2-2. ì•„ë‹ ê²½ìš°ì— ëŒ€í•´ moveë¥¼ ìž¬ê·€ í˜¸ì¶œí•œë‹¤.
 */
 bool isNext(int r, int c) {
 	for (int i = 0; i < M; ++i)
@@ -45,31 +45,31 @@ bool findNext() {
 		cout << fishes[i].r << ", " << fishes[i].c << " - " << fishes[i].size << endl;
 	cout << endl;
 
-	// ´ÙÀ½ Àâ¾Æ ¸ÔÀ» ¹°°í±â ¸ñ·Ï ÃßÃâ
+	// ë‹¤ìŒ ìž¡ì•„ ë¨¹ì„ ë¬¼ê³ ê¸° ëª©ë¡ ì¶”ì¶œ
 	for (int i = 0; i < M; ++i)
 		if (map[fishes[i].r][fishes[i].c] != 0 && fishes[i].size < fsize)
 			next_fishes[++nM] = fishes[i];
 
-	// Á¾·á Á¶°Ç
+	// ì¢…ë£Œ ì¡°ê±´
 	if (nM == -1)
 		return false;
 	
-	// ¸ÔÀ» ¼ö ÀÖ´Â ¹°°í±â°¡ 1¸¶¸®¶ó¸é, ±× ¹°°í±â¸¦ ¸ÔÀ¸·¯ °£´Ù.
+	// ë¨¹ì„ ìˆ˜ ìžˆëŠ” ë¬¼ê³ ê¸°ê°€ 1ë§ˆë¦¬ë¼ë©´, ê·¸ ë¬¼ê³ ê¸°ë¥¼ ë¨¹ìœ¼ëŸ¬ ê°„ë‹¤.
 	if (nM == 0) {
 		target = next_fishes[0];
 		return true;
 	}
 
-	// Àâ¾Æ ¸ÔÀ» ¹°°í±â 1°³ ÁöÁ¤
+	// ìž¡ì•„ ë¨¹ì„ ë¬¼ê³ ê¸° 1ê°œ ì§€ì •
 	target = next_fishes[0];
-	// ¸ÔÀ» ¼ö ÀÖ´Â ¹°°í±â°¡ 1¸¶¸®º¸´Ù ¸¹´Ù¸é, °Å¸®°¡ °¡Àå °¡±î¿î ¹°°í±â¸¦ ¸ÔÀ¸·¯ °£´Ù. 
+	// ë¨¹ì„ ìˆ˜ ìžˆëŠ” ë¬¼ê³ ê¸°ê°€ 1ë§ˆë¦¬ë³´ë‹¤ ë§Žë‹¤ë©´, ê±°ë¦¬ê°€ ê°€ìž¥ ê°€ê¹Œìš´ ë¬¼ê³ ê¸°ë¥¼ ë¨¹ìœ¼ëŸ¬ ê°„ë‹¤. 
 	int min_val = abs(r - target.r) + abs(c - target.c);
 	for (int i = 1; i <= nM; ++i) 
 		if(min_val > abs(r - next_fishes[i].r) + abs(c - next_fishes[i].c))
 		//if (target.c > next_fishes[i].c) 
 			target = next_fishes[i];
 	
-	// ÇØ´ç ¹°°í±â¸¦ ´ÙÀ½ ¸ñ·Ï¿¡¼­ Á¦¿Ü
+	// í•´ë‹¹ ë¬¼ê³ ê¸°ë¥¼ ë‹¤ìŒ ëª©ë¡ì—ì„œ ì œì™¸
 	for (int i = 0; i < M; ++i)
 		if (fishes[i].r == target.r && fishes[i].c == target.c)
 			fishes[i].size = 0;
@@ -90,28 +90,28 @@ void move2(int *cnt) {
 
 	while (loop--) {
 		pair<int, int> t = que.front(); que.pop();
-		cout << *cnt - 1 << "¹ø : (" << t.first << "," << t.second << ") fsize : " << fsize << ", eat_cnt : " << eat_cnt << endl;
+		cout << *cnt - 1 << "ë²ˆ : (" << t.first << "," << t.second << ") fsize : " << fsize << ", eat_cnt : " << eat_cnt << endl;
 		for (int i = 0; i < 4; ++i) {
 			int nr = t.first + dx[i];
 			int nc = t.second + dy[i];
-			// ÇöÀç »çÀÌÁîº¸´Ù ÀÛÀº ¹°°í±â¸¦ Ã£Àº °æ¿ì
+			// í˜„ìž¬ ì‚¬ì´ì¦ˆë³´ë‹¤ ìž‘ì€ ë¬¼ê³ ê¸°ë¥¼ ì°¾ì€ ê²½ìš°
 			if (nr >= 0 && nr < N && nc >= 0 && nc < N) {
-				// ÇöÀç À§Ä¡°¡ ¹°°í±âÀÌ°í ÀÌµ¿°¡´ÉÇÑ ¹°°í±â À§Ä¡ÀÏ °æ¿ì
+				// í˜„ìž¬ ìœ„ì¹˜ê°€ ë¬¼ê³ ê¸°ì´ê³  ì´ë™ê°€ëŠ¥í•œ ë¬¼ê³ ê¸° ìœ„ì¹˜ì¼ ê²½ìš°
 				if (map[nr][nc] != 0 && isNext(nr, nc)) { 
-					++eat_cnt; // ¸ÔÀº Ä«¿îÆ® Áõ°¡
-					map[nr][nc] = 0; // ¸Ê ÃÊ±âÈ­
-					if (eat_cnt == fsize) { // ¸ÔÀº Ä«¿îÆ®¿Í »çÀÌÁî ÀÏÄ¡ ½Ã »çÀÌÁî Áõ°¡
+					++eat_cnt; // ë¨¹ì€ ì¹´ìš´íŠ¸ ì¦ê°€
+					map[nr][nc] = 0; // ë§µ ì´ˆê¸°í™”
+					if (eat_cnt == fsize) { // ë¨¹ì€ ì¹´ìš´íŠ¸ì™€ ì‚¬ì´ì¦ˆ ì¼ì¹˜ ì‹œ ì‚¬ì´ì¦ˆ ì¦ê°€
 						fsize++;
 						eat_cnt = 0;
 					}
-					r = nr; // ÀÌµ¿ °æ·Î °»½Å
+					r = nr; // ì´ë™ ê²½ë¡œ ê°±ì‹ 
 					c = nc;
-					// queueÀÇ µ¥ÀÌÅÍ ÀüºÎ »èÁ¦
+					// queueì˜ ë°ì´í„° ì „ë¶€ ì‚­ì œ
 					while (que.size()) que.pop();
 					isMoved = true;
 					return;
 				}
-				// 0ÀÌ°Å³ª ÀÚ±â ÀÚ½Å°ú ÀÏÄ¡ÇÏ´Â »çÀÌÁîÀÇ ÁÂÇ¥ÀÏ °æ¿ì 
+				// 0ì´ê±°ë‚˜ ìžê¸° ìžì‹ ê³¼ ì¼ì¹˜í•˜ëŠ” ì‚¬ì´ì¦ˆì˜ ì¢Œí‘œì¼ ê²½ìš° 
 				else if (map[nr][nc] == 0 || map[nr][nc] == fsize) {
 					que.push(make_pair(nr, nc));
 				}
@@ -129,7 +129,7 @@ bool move(int *cnt) {
 
 	while (loop--) {
 		pair<int, int> t = que.front(); que.pop();
-		cout << *cnt - 1<< "¹ø : (" << t.first << "," << t.second << ") fsize : " << fsize << ", eat_cnt : " << eat_cnt << endl;
+		cout << *cnt - 1<< "ë²ˆ : (" << t.first << "," << t.second << ") fsize : " << fsize << ", eat_cnt : " << eat_cnt << endl;
 		for (int i = 0; i < 4; ++i) {
 			int nr = t.first + dx[i];
 			int nc = t.second + dy[i];
@@ -142,8 +142,8 @@ bool move(int *cnt) {
 						eat_cnt = 0;
 						map[nr][nc] = 0;
 					}
-					cout << *cnt - 1 << "¹ø(Á¾·á) : (" << nr << "," << nc << ") fsize : " << fsize << ", eat_cnt : " << eat_cnt << endl;
-					// queueÀÇ µ¥ÀÌÅÍ ÀüºÎ »èÁ¦
+					cout << *cnt - 1 << "ë²ˆ(ì¢…ë£Œ) : (" << nr << "," << nc << ") fsize : " << fsize << ", eat_cnt : " << eat_cnt << endl;
+					// queueì˜ ë°ì´í„° ì „ë¶€ ì‚­ì œ
 					while (que.size()) que.pop();
 					return true;
 				}
@@ -156,14 +156,14 @@ bool move(int *cnt) {
 	return move(cnt);
 }
 int solve() {
-	//ÃÊ±â°ª ¼¼ÆÃ
+	//ì´ˆê¸°ê°’ ì„¸íŒ…
 	int cnt = 0;
 	que.push(make_pair(r, c));
 
-	// ´ÙÀ½ ÀÌµ¿ÇÒ ¹°°í±â°¡ ÀÖÀ» °æ¿ì±îÁö ¹Ýº¹
+	// ë‹¤ìŒ ì´ë™í•  ë¬¼ê³ ê¸°ê°€ ìžˆì„ ê²½ìš°ê¹Œì§€ ë°˜ë³µ
 	while (findNext2()) {
 		move2(&cnt);
-		if (isMoved) { // ¹°°í±â À§Ä¡¸¦ Ã£Àº °æ¿ì¿¡¸¸ Å¥¿¡ ÇöÀçÀ§Ä¡ Ãß°¡
+		if (isMoved) { // ë¬¼ê³ ê¸° ìœ„ì¹˜ë¥¼ ì°¾ì€ ê²½ìš°ì—ë§Œ íì— í˜„ìž¬ìœ„ì¹˜ ì¶”ê°€
 			que.push(make_pair(r, c));
 			isMoved = false;
 		}
@@ -182,7 +182,7 @@ int main() {
 			if (map[i][j] == 9) {
 				r = i;
 				c = j;
-				map[i][j] = 0; // ÃÊ±â ¾Æ±â»ó¾î À§Ä¡ 0À¸·Î ÁöÁ¤
+				map[i][j] = 0; // ì´ˆê¸° ì•„ê¸°ìƒì–´ ìœ„ì¹˜ 0ìœ¼ë¡œ ì§€ì •
 			}
 			else if (map[i][j] > 0 && map[i][j] < 7) {
 				Fish fish;
