@@ -53,10 +53,10 @@ public class swexpert_7250 {
 			// solve
 			boolean isAlive = true;
 			boolean scottWin = false;
-			int res = Integer.MAX_VALUE; // ½ºÄ±ÀÇ ÃÖ´Ü °æ·Î
+			int res = Integer.MAX_VALUE; // ìŠ¤ìº‡ì˜ ìµœë‹¨ ê²½ë¡œ
 			while(isAlive && !scottWin) {
 				
-				// ºÒÀÌ ¸ÕÀú ¹øÁö±â ½ÃÀÛÇÑ´Ù.
+				// ë¶ˆì´ ë¨¼ì € ë²ˆì§€ê¸° ì‹œì‘í•œë‹¤.
 				int size = fque.size();
 				for(int i = 0; i < size && isAlive; ++i) {
 					Point cur = fque.remove();
@@ -66,20 +66,11 @@ public class swexpert_7250 {
 						if(nx < 0 || nx >= N || ny < 0 || ny >= M || map[nx][ny] == 'W' || map[nx][ny] == 'X' || map[nx][ny] =='E' )
 							continue;
 						fque.add(new Point(nx, ny));
-						/*if(map[nx][ny] == 'E') {
-							isAlive = false;
-							break;
-						}*/
 						map[nx][ny] = 'F';
 					}
 				}
 				
-				// ºÒÀÌ µµÂøÁöÁ¡¿¡ ¸ÕÀú ¹øÁø °æ¿ì
-				/*if(!isAlive) {
-					break;
-				}*/
-				
-				// ¾Ç´çÀÌ ´ÙÀ½À¸·Î ÀÌµ¿ÇÑ´Ù.
+				// ì•…ë‹¹ì´ ë‹¤ìŒìœ¼ë¡œ ì´ë™í•œë‹¤.
 				size = vque.size();
 				for(int i = 0; i < size && isAlive; ++i) {
 					Point cur = vque.remove();
@@ -96,12 +87,12 @@ public class swexpert_7250 {
 					}
 				}
 				
-				// ¾Ç´çÀÌ µµÂøÁöÁ¡¿¡ ¸ÕÀú µµÂøÇÑ °æ¿ì
+				// ì•…ë‹¹ì´ ë„ì°©ì§€ì ì— ë¨¼ì € ë„ì°©í•œ ê²½ìš°
 				if(!isAlive) {
 					break;
 				}
 				
-				// ½ºÄ±ÀÌ ¸¶Áö¸·À¸·Î ÀÌµ¿ÇÑ´Ù.
+				// ìŠ¤ìº‡ì´ ë§ˆì§€ë§‰ìœ¼ë¡œ ì´ë™í•œë‹¤.
 				size = sque.size();
 				for(int i = 0; i < size && !scottWin; ++i) {
 					Scott cur = sque.remove();
@@ -130,10 +121,8 @@ public class swexpert_7250 {
 			}
 			else {
 				System.out.println("#" + tc + " -1");
-			}
-			
+			}	
 		} // end of test case
-		
 	}// end of main
 
 } // end of class
