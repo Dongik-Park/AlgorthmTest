@@ -1,10 +1,10 @@
 #include<iostream>
 using namespace std;
 
-char str[7];	// ÀÔ·Â string
-char ans[7];	// °á°ú string
-int swapCount;  // swap È½¼ö
-int len;		// ÀÔ·Â string ±æÀÌ
+char str[7];	// ì…ë ¥ string
+char ans[7];	// ê²°ê³¼ string
+int swapCount;  // swap íšŸìˆ˜
+int len; 	// ì…ë ¥ string ê¸¸ì´
 
 int strlen(char * str) {
 	int cnt = 0;
@@ -38,9 +38,9 @@ void swap(char *str, int i, int j) {
 }
 
 void solve(char *str, int cnt, int offset) {
-	// Á¾·áÁ¶°Ç : swap ¼±ÅÃÀÌ ¿Ï·áµÈ °æ¿ì
+	// ì¢…ë£Œì¡°ê±´ : swap ì„ íƒì´ ì™„ë£Œëœ ê²½ìš°
 	if (cnt == 0) {
-		// strÀÌ ´õ Å« °ªÀÏ °æ¿ì °»½Å
+		// strì´ ë” í° ê°’ì¼ ê²½ìš° ê°±ì‹ 
 		if (strcmp(str, ans) > 0) {
 			strcpy(ans, str);
 		}
@@ -49,9 +49,9 @@ void solve(char *str, int cnt, int offset) {
 
 	for (int i = offset; i < len; ++i) {
 		for (int j = i; j < len; ++j) {
-			if (i == j || str[i] > str[j]) continue; // iÀÇ °ªÀÌ Å¬°æ¿ì
+			if (i == j || str[i] > str[j]) continue; // iì˜ ê°’ì´ í´ê²½ìš°
 			swap(str, i, j);
-			solve(str, cnt - 1, i); // iÀ§Ä¡ºÎÅÍ Ãß°¡ ÁøÇà
+			solve(str, cnt - 1, i); // iìœ„ì¹˜ë¶€í„° ì¶”ê°€ ì§„í–‰
 			swap(str, j, i);
 		}
 	}
